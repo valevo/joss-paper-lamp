@@ -20,7 +20,6 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
-
 # Define functions which animate LEDs in various ways.
 def colorWipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
@@ -89,10 +88,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.brightness:
-        LED_BRIGHTNESS = args.brightness
+        LED_BRIGHTNESS = int(args.brightness)
+        assert 0 < LED_BRIGHTNESS < 255
 
     if args.numleds:
-        LED_COUNT = args.numleds
+        LED_COUNT = int(args.numleds)
+        assert 0 < LED_COUNT < 144
     
     # Create NeoPixel object with appropriate configuration.
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
