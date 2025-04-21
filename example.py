@@ -77,6 +77,12 @@ def theaterChaseRainbow(strip, wait_ms=50):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, 0)
 
+def constant(strip, wait_ms=50):
+    candle = Candle(255, 147, 41)
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, candle)
+
+
 # Main program logic follows:
 if __name__ == '__main__':
     # Process arguments
@@ -89,11 +95,11 @@ if __name__ == '__main__':
 
     if args.brightness:
         LED_BRIGHTNESS = int(args.brightness)
-        assert 0 < LED_BRIGHTNESS < 255
+        assert 0 <= LED_BRIGHTNESS <= 255
 
     if args.numleds:
         LED_COUNT = int(args.numleds)
-        assert 0 < LED_COUNT < 144
+        assert 0 <= LED_COUNT <= 144
     
     # Create NeoPixel object with appropriate configuration.
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
